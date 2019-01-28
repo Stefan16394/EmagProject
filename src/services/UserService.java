@@ -26,16 +26,12 @@ public class UserService {
 		}
 	}
 
-	public void login(UserStorage userStorage) {
+	public User login(UserStorage userStorage) {
 		System.out.println("Please enter email:");
 		String email = sc.nextLine();
 		System.out.println("Please enter password:");
 		String password = sc.nextLine();
-//		User user = userStorage.logIn(email, password);
-//		if (user != null) {
-//			App.user = user;
-//		}
-//		System.out.println(App.user.getEmail());
-
+		User user = userStorage.logIn(email, password);
+		return user;
 	}
 }

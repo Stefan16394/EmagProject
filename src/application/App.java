@@ -3,10 +3,12 @@ package application;
 import java.util.Scanner;
 import services.UserService;
 import storage.UserStorage;
+import users.User;
 
 public class App {
 	private UserService userService;
 	private UserStorage userStorage;
+	private User currentUser;
 	
 	public App() {
 		this.userService = new UserService();
@@ -25,7 +27,11 @@ public class App {
 				this.userService.register(this.userStorage);
 				break;
 			case 2:
-				this.userService.login(this.userStorage);
+				User user = this.userService.login(this.userStorage);
+				if(user!=null) {
+					this.currentUser = user;
+				}
+				System.out.println(this.currentUser.getEmail());
 				break;
 			case 3:
 				userStorage.listUsers();
