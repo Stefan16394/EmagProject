@@ -20,24 +20,23 @@ public class App {
 		
 		while(true) {
 			System.out.println("Enter command: 1- register User, 2- logIn, 3-listusers");
-			int command = sc.nextInt();
-			sc.nextLine();
+			String command = sc.nextLine();
 			switch (command) {
-			case 1:
+			case "1":
 				this.userService.register(this.userStorage);
 				break;
-			case 2:
+			case "2":
 				User user = this.userService.login(this.userStorage);
 				if(user!=null) {
 					this.currentUser = user;
 				}
 				System.out.println(this.currentUser.getEmail());
 				break;
-			case 3:
+			case "3":
 				userStorage.listUsers();
 				break;
 			default:
-				return;
+				System.out.println("Invalid command!");
 			}
 			System.out.println();
 		}	 
