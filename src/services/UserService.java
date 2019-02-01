@@ -7,11 +7,7 @@ import storage.UserStorage;
 import users.User;
 
 public class UserService {
-	private Scanner sc;
-
-	public UserService() {
-		this.sc = new Scanner(System.in);
-	}
+	private static Scanner sc = new Scanner(System.in);
 
 	public void register(UserStorage userStorage) {
 		System.out.println("Please enter email:");

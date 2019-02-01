@@ -9,7 +9,7 @@ public class UserStorage {
 	private Map<String, User> users;
 
 	public UserStorage() {
-		this.users = new HashMap<>();
+		this.users = new HashMap<String, User>();
 	}
 
 	public void registerUser(User user) {

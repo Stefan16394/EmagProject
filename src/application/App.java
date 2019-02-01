@@ -24,9 +24,15 @@ public class App {
 	
 	public void startApp() {
 		Scanner sc = new Scanner(System.in);
+		this.productService.generateRandomProducts(this.productStorage);
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		this.productStorage.listAllProducts();
 		
 		while(true) {
-			System.out.println("Enter command: 1- register User, 2- logIn, 3-listusers, 4-Add Product");
+			System.out.println("Enter command: 1 - register User, 2 - log in, 3 - list users, 4 - Add Product, 5 - Find Product By Category");
 			String command = sc.nextLine();
 			switch (command) {
 			case "1":
@@ -44,6 +50,9 @@ public class App {
 				break;
 			case "4":
 				this.productService.createProduct(this.productStorage);
+				break;
+			case "5":
+				this.productService.findProductsByCategory(this.productStorage);
 				break;
 			default:
 				System.out.println("Invalid command!");
