@@ -9,7 +9,7 @@ public class UserStorage {
 	private Map<String, User> users;
 
 	public UserStorage() {
-		this.users = new HashMap<>();
+		this.users = new HashMap<String, User>();
 	}
 
 	public void registerUser(User user) {
@@ -17,8 +17,15 @@ public class UserStorage {
 			System.out.println("User already exist.");
 		} else {
 			this.users.put(user.getEmail(), user);
-			System.out.println("User " + user.getEmail() + " registered successfully!");
+			if (!user.isAdmin()) {
+				System.out.println("User " + user.getEmail() + " registered successfully!");
+			}
 		}
+	}
+	
+	public void deleteAccount(User user) {
+		this.users.remove(user.getEmail());
+		System.out.println("The user is deleted successfully!");
 	}
 
 	public User logIn(String email, String password) {

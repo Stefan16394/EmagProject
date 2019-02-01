@@ -6,14 +6,22 @@ import regexPatterns.RegexPatterns;
 public class User {
 	private String email;
 	private String password;
+	private boolean isAdmin;
+	private static final String EMAIL = "koko@gmail.com";
+	private static final String PASSWORD = "1234";
 
-	public User(String email, String password) throws UserRegisterException {
+	public User(String email, String password, boolean isAdmin) throws UserRegisterException {
 		try {
 			this.setEmail(email);
 			this.setPassword(password);
+			this.isAdmin = isAdmin;
 		} catch (UserRegisterException e) {
 			throw new UserRegisterException("Registration unsuccessfull.", e);
 		}
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
 	}
 
 	public String getEmail() {
@@ -39,5 +47,4 @@ public class User {
 		}
 		this.password = password;
 	}
-
 }

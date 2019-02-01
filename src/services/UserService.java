@@ -7,11 +7,7 @@ import storage.UserStorage;
 import users.User;
 
 public class UserService {
-	private Scanner sc;
-
-	public UserService() {
-		this.sc = new Scanner(System.in);
-	}
+	private static Scanner sc = new Scanner(System.in);
 
 	public void register(UserStorage userStorage) {
 		System.out.println("Please enter email:");
@@ -19,7 +15,7 @@ public class UserService {
 		System.out.println("Please enter password:");
 		String password = sc.nextLine();
 
-		User user = UserFactory.createUser(email, password);
+		User user = UserFactory.createUser(email, password, false);
 
 		if (user != null) {
 			userStorage.registerUser(user);
@@ -33,5 +29,9 @@ public class UserService {
 		String password = sc.nextLine();
 		User user = userStorage.logIn(email, password);
 		return user;
+	}
+
+	public void deleteAccount(UserStorage userStorage, User currentUser) {
+		userStorage.deleteAccount(currentUser);
 	}
 }
