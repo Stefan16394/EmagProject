@@ -5,7 +5,7 @@ import users.User;
 
 public class UserFactory {
 
-	public static User createUser(String email, String password,boolean isAdmin) {
+	public static User createUser(String email, String password, boolean isAdmin) {
 		User user = null;
 		try {
 			user = new User(email, password, isAdmin);

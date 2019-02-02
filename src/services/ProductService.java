@@ -3,9 +3,12 @@ package services;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 import comparators.DateComparator;
 import comparators.PriceAscendingComparator;
@@ -15,6 +18,7 @@ import comparators.RateComparator;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import products.CategoryStorage;
 import products.Product;
@@ -78,13 +82,15 @@ public class ProductService {
 		int input2 = sc.nextInt();
 		String subCategory = subCategories.get(input2);
 
+		sc.nextLine();
 		System.out.println("Choose sort criteria:");
 		System.out.println("1 -> price - ascending order");
 		System.out.println("2 -> price - descending order");
 		System.out.println("3 -> from newest to oldest products");
 		System.out.println("4 -> rate");
+		String criteria = sc.nextLine();
 
-		String criteria = sc.next();
+
 		Comparator<Product> comparator = new PriceAscendingComparator();
 		switch (criteria) {
 		case ("2"):
@@ -97,17 +103,26 @@ public class ProductService {
 			comparator = new RateComparator();
 			break;
 		}
-		Set<Product> products = storage.findProductsByCategorieAndSubcategory(category, subCategory);
-		Map<Integer, Product> productList = new LinkedHashMap<Integer, Product>();
-		int count = 1;
-		for (Product p : products) {
-			productList.put(count++, p);
+		List<Product> products = 
+				storage.findProductsByCategorieAndSubcategory(category, subCategory)
+				.stream()
+				.sorted(comparator)
+				.collect(Collectors.toList());
+				
+		System.out.println("Products in category "+subCategory+":");
+		for(Iterator<Product> it=products.iterator();it.hasNext();) {
+			Product product = it.next();
+			System.out.println(product.getProduct_id()+" - " + product);
 		}
-
-		System.out.println("Choose product:");
-		for (Entry<Integer, Product> pr : productList.entrySet()) {
-			System.out.println(pr.getKey() + " - ");
+		System.out.println("Choose product by id:");
+		int id = sc.nextInt();
+		Optional<Product> product = products.stream().filter(p->p.getProduct_id() == id).findFirst();
+		if(product.isPresent()) {
+			System.out.println(product);
+		}else {
+			System.out.println("This product doesnt exist");
 		}
+		
 	}
 
 	public void generateRandomProducts(ProductStorage productStorage) {
@@ -123,23 +138,23 @@ public class ProductService {
 					System.out.println("Entry some characteristics for the product of category " + category
 							+ ", subcategory " + subC + ":\n");
 					Map<String, String> characteristics = new HashMap<String, String>();
-					while (true) {
-						System.out.println("To exit press '0'!\n");
-						String s1 = sc.nextLine();
-						if (s1.equals("r")) {
-							return;
-						}
-						if (s1.equals("0")) {
-							break;
-						}
-						String s2 = sc.nextLine();
-						if (s2.equals("0")) {
-							break;
-						} else {
-							if ((s1 != null && s2 != null) && (s1.trim().length() != 0 && s2.trim().length() != 0))
-								characteristics.put(s1, s2);
-						}
-					}
+//					while (true) {
+//						System.out.println("To exit press '0'!\n");
+//						String s1 = sc.nextLine();
+//						if (s1.equals("r")) {
+//							return;
+//						}
+//						if (s1.equals("0")) {
+//							break;
+//						}
+//						String s2 = sc.nextLine();
+//						if (s2.equals("0")) {
+//							break;
+//						} else {
+//							if ((s1 != null && s2 != null) && (s1.trim().length() != 0 && s2.trim().length() != 0))
+//								characteristics.put(s1, s2);
+//						}
+//					}
 					Product product = new Product(price, quantity, Collections.unmodifiableMap(characteristics));
 					productStorage.addProduct(category, subC, product);
 				}
