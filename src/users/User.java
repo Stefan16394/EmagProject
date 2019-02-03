@@ -7,14 +7,14 @@ public class User {
 	private String email;
 	private String password;
 	private boolean isAdmin;
-	private static final String EMAIL = "koko@gmail.com";
-	private static final String PASSWORD = "1234";
+	private ShoppingCart cart;
 
 	public User(String email, String password, boolean isAdmin) throws UserRegisterException {
 		try {
 			this.setEmail(email);
 			this.setPassword(password);
 			this.isAdmin = isAdmin;
+			this.cart = new ShoppingCart();
 		} catch (UserRegisterException e) {
 			throw new UserRegisterException("Registration unsuccessfull.", e);
 		}
@@ -46,5 +46,9 @@ public class User {
 			throw new UserRegisterException("Invalid password pattern. Please try again.");
 		}
 		this.password = password;
+	}
+
+	public ShoppingCart getCart() {
+		return cart;
 	}
 }

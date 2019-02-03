@@ -65,6 +65,14 @@ public class Product {
 			this.quantity = quantity;
 	}
 
+	public void increaseQuantity(int quantity) {
+		this.quantity += quantity;
+	}
+
+	public void decreaseQuantity(int quantity) {
+		this.quantity -= quantity;
+	}
+
 	private String listCharacteristics() {
 		if (this.characteristics == null) {
 			return "";
@@ -83,8 +91,9 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product : price = " + price + ", id = " + this.product_id + ", rate= " + getRate() + ", quantity = " + quantity
-				+ ", creationDate = " + this.creationDate + " Some more characteristics: " + this.listCharacteristics();
+		return "Product : price = " + price + ", id = " + this.product_id + ", rate= " + getRate() + ", quantity = "
+				+ quantity + ", creationDate = " + this.creationDate + " Some more characteristics: "
+				+ this.listCharacteristics();
 	}
 
 	public int getProduct_id() {
