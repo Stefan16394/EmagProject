@@ -34,4 +34,26 @@ public class UserService {
 	public void deleteAccount(UserStorage userStorage, User currentUser) {
 		userStorage.deleteAccount(currentUser);
 	}
+	
+	public void checkShoppingCart(User user) {
+		while(true) {
+			System.out.println("Enter command: 1 - Show all products 2 - Buy all products 3 - Remove product "
+					+ "4 - Change the quantity of some product 5 - Exit");
+			String command = sc.nextLine();
+			switch (command) {
+			case "1":
+				user.getCart().showProductsInTheCart();
+				break;
+			case "2":
+				user.getCart().buyAllProducts();
+				break;
+			case "3":
+				user.getCart().removeProduct();
+				break;
+			default:
+				return;
+			}
+		}
+//		System.out.println("");
+	}
 }

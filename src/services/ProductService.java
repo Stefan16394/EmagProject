@@ -24,6 +24,7 @@ import products.CategoryStorage;
 import products.Product;
 import products.ProductCategories;
 import storage.ProductStorage;
+import users.User;
 
 public class ProductService {
 	private CategoryStorage categoryStorage;
@@ -67,20 +68,44 @@ public class ProductService {
 		}
 	}
 
-	public void findProductsByCategory(ProductStorage storage) {
-		System.out.println("Choose category:");
-		for (Entry<Integer, ProductCategories> category : this.categoryStorage.getCategories().entrySet()) {
-			System.out.println(category.getKey() + " - " + category.getValue());
+	private ProductCategories chooseCategory() {
+		while (true) {
+			System.out.println("Choose category:");
+			for (Entry<Integer, ProductCategories> category : this.categoryStorage.getCategories().entrySet()) {
+				System.out.println(category.getKey() + " - " + category.getValue());
+			}
+			int input = sc.nextInt();
+			ProductCategories category = this.categoryStorage.getCategories().get(input);
+			if (category == null) {
+				System.out.println("There is no such category!");
+			} else {
+				return category;
+			}
 		}
-		int input = sc.nextInt();
-		ProductCategories category = this.categoryStorage.getCategories().get(input);
+	}
 
-		Map<Integer, String> subCategories = categoryStorage.getSubCategories().get(category);
-		for (Entry<Integer, String> entry : subCategories.entrySet()) {
-			System.out.println(entry.getKey() + " - " + entry.getValue());
+	private String chooseSubcategory(ProductCategories category) {
+		while (true) {
+			Map<Integer, String> subCategories = categoryStorage.getSubCategories().get(category);
+			for (Entry<Integer, String> entry : subCategories.entrySet()) {
+				System.out.println(entry.getKey() + " - " + entry.getValue());
+			}
+			System.out.println("Choose subcategory:");
+			int input2 = sc.nextInt();
+			String subCategory = subCategories.get(input2);
+			if (subCategory == null) {
+				System.out.println("There is no such subcategory!");
+			} else {
+				return subCategory;
+			}
 		}
-		int input2 = sc.nextInt();
-		String subCategory = subCategories.get(input2);
+	}
+
+	public void findProductsByCategory(ProductStorage storage, User user) {
+
+		ProductCategories category = chooseCategory();
+
+		String subCategory = chooseSubcategory(category);
 
 		sc.nextLine();
 		System.out.println("Choose sort criteria:");
@@ -89,7 +114,6 @@ public class ProductService {
 		System.out.println("3 -> from newest to oldest products");
 		System.out.println("4 -> rate");
 		String criteria = sc.nextLine();
-
 
 		Comparator<Product> comparator = new PriceAscendingComparator();
 		switch (criteria) {
@@ -103,26 +127,45 @@ public class ProductService {
 			comparator = new RateComparator();
 			break;
 		}
-		List<Product> products = 
-				storage.findProductsByCategorieAndSubcategory(category, subCategory)
-				.stream()
-				.sorted(comparator)
-				.collect(Collectors.toList());
-				
-		System.out.println("Products in category "+subCategory+":");
-		for(Iterator<Product> it=products.iterator();it.hasNext();) {
-			Product product = it.next();
-			System.out.println(product.getProduct_id()+" - " + product);
-		}
-		System.out.println("Choose product by id:");
-		int id = sc.nextInt();
-		Optional<Product> product = products.stream().filter(p->p.getProduct_id() == id).findFirst();
-		if(product.isPresent()) {
-			System.out.println(product);
-		}else {
-			System.out.println("This product doesnt exist");
-		}
+		List<Product> products = storage.findProductsByCategorieAndSubcategory(category, subCategory).stream()
+				.sorted(comparator).collect(Collectors.toList());
+
 		
+
+		while (true) {
+			System.out.println("Products in category " + subCategory + ":");
+			for (Iterator<Product> it = products.iterator(); it.hasNext();) {
+				Product product = it.next();
+				System.out.println(product.getProduct_id() + " - " + product);
+			}
+			
+			System.out.println("Choose product by id:");
+			System.out.println("For exit press '0'");
+			int id = sc.nextInt();
+			sc.nextLine();
+			if(id == 0) {
+				return;
+			}
+			Optional<Product> product = products.stream().filter(p -> p.getProduct_id() == id).findFirst();
+			if (product.isPresent()) {
+				System.out.println("Do you want to add in your cart? Press 'y' for yes.");
+				String answer = sc.nextLine();
+				if (answer.equals("y")) {
+					if (user != null) {
+						System.out.println("Enter quantity:");
+						int quantity = sc.nextInt();
+						user.getCart().addProduct(product.get(), quantity);
+					} else {
+						System.out.println("You need to log in first!");
+						break;
+					}
+				} else {
+					System.out.println("OK! Have a nice day!");
+				}
+			} else {
+				System.out.println("This product doesnt exist");
+			}
+		}
 	}
 
 	public void generateRandomProducts(ProductStorage productStorage) {
