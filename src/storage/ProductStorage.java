@@ -1,19 +1,26 @@
 package storage;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
+import products.Order;
 import products.Product;
 import products.ProductCategories;
+import suppliers.Distributor;
+import users.User;
 
 public class ProductStorage {
 	private Map<ProductCategories, Map<String, Set<Product>>> products;
+	private OrdersStorage ordersStorage;
+	private Distributor distributor;
 
 	public ProductStorage() {
 		this.products = new TreeMap<ProductCategories, Map<String, Set<Product>>>();
+		this.ordersStorage = new OrdersStorage();
 	}
 
 	public void addProduct(ProductCategories category, String subCategory, Product product) {
@@ -39,8 +46,24 @@ public class ProductStorage {
 			}
 		}
 	}
+	
+	public void addOrder(User user,Order orders) {
+		this.ordersStorage.addOrder(user, orders);
+	}
+	
+	public void listUserOrders(User user) {
+		this.ordersStorage.listUserOrders(user);
+	}
 
-	public Set<Product> findProductsByCategorieAndSubcategory(ProductCategories category, String subCategory) {
+	public Set<Product> findProductsByCategoryAndSubcategory(ProductCategories category, String subCategory) {
 		return this.products.get(category).get(subCategory);
+	}
+
+	public Distributor getDistributor() {
+		return distributor;
+	}
+
+	public void setDistributor(Distributor distributor) {
+		this.distributor = distributor;
 	}
 }

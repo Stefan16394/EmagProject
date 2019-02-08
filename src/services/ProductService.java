@@ -27,14 +27,15 @@ import storage.ProductStorage;
 import users.User;
 
 public class ProductService {
-	private CategoryStorage categoryStorage;
 	private static Scanner sc = new Scanner(System.in);;
+	private CategoryStorage categoryStorage;
+	private ProductStorage productStorage;
 
 	public ProductService() {
 		this.categoryStorage = new CategoryStorage();
 	}
 
-	public void createProduct(ProductStorage productStorage) {
+	public void createProduct() {
 		System.out.println("Choose category:");
 		for (Entry<Integer, ProductCategories> category : this.categoryStorage.getCategories().entrySet()) {
 			System.out.println(category.getKey() + " - " + category.getValue());
@@ -48,7 +49,7 @@ public class ProductService {
 			if (category != null) {
 				System.out.println(category);
 			}
-			Map<Integer, String> subCategories = categoryStorage.getSubCategories().get(category);
+			Map<Integer, String> subCategories = this.categoryStorage.getSubCategories().get(category);
 			for (Entry<Integer, String> entry : subCategories.entrySet()) {
 				System.out.println(entry.getKey() + " - " + entry.getValue());
 			}
@@ -61,7 +62,7 @@ public class ProductService {
 				int quantity = new Random().nextInt(20) + 1;
 				Product product = new Product(price, quantity, null);
 				System.out.println(product);
-				productStorage.addProduct(category, subCat, product);
+				this.productStorage.addProduct(category, subCat, product);
 			} else {
 				System.out.println(("Invalid entry. Please try again."));
 			}
@@ -101,7 +102,7 @@ public class ProductService {
 		}
 	}
 
-	public void findProductsByCategory(ProductStorage storage, User user) {
+	public void findProductsByCategory(User user) {
 
 		ProductCategories category = chooseCategory();
 
@@ -127,7 +128,7 @@ public class ProductService {
 			comparator = new RateComparator();
 			break;
 		}
-		List<Product> products = storage.findProductsByCategorieAndSubcategory(category, subCategory).stream()
+		List<Product> products = this.productStorage.findProductsByCategoryAndSubcategory(category, subCategory).stream()
 				.sorted(comparator).collect(Collectors.toList());
 
 		
@@ -168,7 +169,7 @@ public class ProductService {
 		}
 	}
 
-	public void generateRandomProducts(ProductStorage productStorage) {
+	public void generateRandomProducts() {
 		for (Entry<ProductCategories, Map<Integer, String>> s : this.categoryStorage.getSubCategories().entrySet()) {
 			ProductCategories category = s.getKey();
 			System.out.println(category);
@@ -204,5 +205,36 @@ public class ProductService {
 			}
 			System.out.println("-----");
 		}
+	}
+	
+	public void checkShoppingCart(User user) {
+		while(true) {
+			System.out.println("Enter command: 1 - Show all products 2 - Buy all products 3 - Remove product "
+					+ "4 - Change the quantity of some product 5 - List My Orders 6 - Exit");
+			String command = sc.nextLine();
+			switch (command) {
+			case "1":
+				user.getCart().showProductsInTheCart();
+				break;
+			case "2":
+				user.getCart().buyAllProducts(this.productStorage, user);
+				break;
+			case "3":
+				user.getCart().removeProduct();
+				break;
+			case "4":
+				user.getCart().changeQuantityOfProduct();
+				break;
+			case "5":
+				this.productStorage.listUserOrders(user);
+				break;
+			default:
+				return;
+			}
+		}
+	}
+
+	public void setProductStorage(ProductStorage productStorage) {
+		this.productStorage = productStorage;
 	}
 }

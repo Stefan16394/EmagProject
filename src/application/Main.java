@@ -1,9 +1,11 @@
 package application;
 
+import application.AppSingleton.App;
+
 public class Main {
 
 	public static void main(String[] args) {
-		App app = new App();
+		App app = AppSingleton.getInstance();
 		app.startApp();	
 	}
 

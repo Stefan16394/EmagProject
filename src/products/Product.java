@@ -91,7 +91,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product : price = " + price + ", id = " + this.product_id + ", rate= " + getRate() + ", quantity = "
+		return "Product : price = " +  String.format("%.2f", this.price) + ", id = " + this.product_id + ", rate= " + getRate() + ", quantity = "
 				+ quantity + ", creationDate = " + this.creationDate + " Some more characteristics: "
 				+ this.listCharacteristics();
 	}
