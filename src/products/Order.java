@@ -38,7 +38,7 @@ public class Order {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("------------");
+		sb.append("------------").append("\n");
 		sb.append("Products:\n");
 		for(Entry<Product, Integer> entry:this.products.entrySet()) {
 			sb.append(entry.getKey().getProduct_id()+" - "+ entry.getValue());
@@ -47,7 +47,7 @@ public class Order {
 		sb.append("Total Price: "+ totalPrice).append("\n");
 		sb.append("Order Status: "+ this.orderStatus).append("\n");
 		sb.append("Date of order: "+this.dateOfOrder).append("\n");
-		sb.append("------------");
+		sb.append("------------").append("\n");
 
 		return sb.toString();
 	}
