@@ -1,12 +1,16 @@
 package users;
 
-import exceptions.UserRegisterException;
-import regexPatterns.RegexPatterns;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-public class User {
+import exceptions.UserRegisterException;
+import utilities.RegexPatterns;
+
+public class User implements IObserver {
 	private String email;
 	private String password;
 	private boolean isAdmin;
+	private Deque<Message> messages;
 	private ShoppingCart cart;
 
 	public User(String email, String password, boolean isAdmin) throws UserRegisterException {
@@ -15,6 +19,7 @@ public class User {
 			this.setPassword(password);
 			this.isAdmin = isAdmin;
 			this.cart = new ShoppingCart();
+			this.messages = new ArrayDeque<Message>();
 		} catch (UserRegisterException e) {
 			throw new UserRegisterException("Registration unsuccessfull.", e);
 		}
@@ -51,4 +56,17 @@ public class User {
 	public ShoppingCart getCart() {
 		return cart;
 	}
+	
+
+	@Override
+	public void react(Message message) {
+		if(message != null) {
+			this.messages.push(message);
+		}
+	}
+	
+	public void checkMessages() {
+		this.messages.forEach(m -> System.out.println(m));
+	}
+	
 }

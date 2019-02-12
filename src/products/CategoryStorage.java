@@ -5,6 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import products.ProductCategories.Computers;
+import products.ProductCategories.HealthBeauty;
+import products.ProductCategories.PhonesTabletsLaptops;
+import products.ProductCategories.TVAudioFoto;
+
 public class CategoryStorage {
 	private static int id = 1;
 	private Map<Integer, ProductCategories> categories;

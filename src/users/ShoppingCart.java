@@ -20,100 +20,117 @@ public class ShoppingCart {
 	}
 
 	public void removeProduct() {
-		while (true) {
-			showProductsInTheCart();
-			System.out.println("Enter id! Press 0 for exit!");
-			int id = sc.nextInt();
-			if (id == 0) {
-				return;
-			}
-			Optional<Product> product = products.keySet().stream().filter(p -> p.getProduct_id() == id).findFirst();
-			if (product.isPresent()) {
-				this.products.remove(product.get());
-				System.out.println(product.get().getProduct_id() + " removed successfully!");
-			} else {
-				System.out.println("Wrong id!");
+		if (this.products.isEmpty()) {
+			System.out.println("Your shopping cart is empty!");
+		} else {
+			while (true) {
+				showProductsInTheCart();
+				System.out.println("Enter id! Press 0 for exit!");
+				int id = sc.nextInt();
+				if (id == 0) {
+					return;
+				}
+				Optional<Product> product = products.keySet().stream().filter(p -> p.getProduct_id() == id).findFirst();
+				if (product.isPresent()) {
+					this.products.remove(product.get());
+					System.out.println(product.get().getProduct_id() + " removed successfully!");
+				} else {
+					System.out.println("Wrong id!");
+				}
 			}
 		}
 	}
 
 	public void changeQuantityOfProduct() {
-		while (true) {
-			showProductsInTheCart();
-			System.out.println("Enter id! Press 0 for exit!");
-			int id = sc.nextInt();
-			if (id == 0) {
-				return;
-			}
-			Optional<Product> product = products.keySet().stream().filter(p -> p.getProduct_id() == id).findFirst();
-			if (product.isPresent()) {
-				Product p = product.get();
-				System.out.println("Enter new quantity: ");
-				int newQuantity = sc.nextInt();
-				if (p.getQuantity() < newQuantity) {
-					newQuantity = this.checkProductQuantity(p);
+		if (this.products.isEmpty()) {
+			System.out.println("Your shopping cart is empty!");
+		} else {
+			while (true) {
+				showProductsInTheCart();
+				System.out.println("Enter id! Press 0 for exit!");
+				int id = sc.nextInt();
+				if (id == 0) {
+					return;
 				}
-				if (newQuantity > 0) {
-					this.products.put(p, newQuantity);
-					System.out.println("Quantity succesfully changed to " + newQuantity);
+				Optional<Product> product = products.keySet().stream().filter(p -> p.getProduct_id() == id).findFirst();
+				if (product.isPresent()) {
+					Product p = product.get();
+					System.out.println("Enter new quantity: ");
+					int newQuantity = sc.nextInt();
+					if (p.getQuantity() < newQuantity) {
+						newQuantity = this.checkProductQuantity(p);
+					}
+					if (newQuantity > 0) {
+						this.products.put(p, newQuantity);
+						System.out.println("Quantity succesfully changed to " + newQuantity);
+					} else {
+						System.out.println("Invalid quantity");
+					}
 				} else {
-					System.out.println("Invalid quantity");
+					System.out.println("Wrong id!");
 				}
-
-			} else {
-				System.out.println("Wrong id!");
 			}
 		}
+
 	}
 
 	public void buyAllProducts(ProductStorage productStorage, User user) {
 		float totalPrice = 0;
-		for (Entry<Product, Integer> entry : this.products.entrySet()) {
-			Product product = entry.getKey();
-			int quantity = entry.getValue();
+		if (this.products.isEmpty()) {
+			System.out.println("Your shopping cart is empty!");
+		} else {
+			for (Entry<Product, Integer> entry : this.products.entrySet()) {
+				Product product = entry.getKey();
+				int quantity = entry.getValue();
 
-			if (product.getQuantity() < quantity) {
-				System.out.println("Nqmame dostatychno nalichnost!");
-				quantity = this.checkProductQuantity(product);
-				if (quantity != 0) {
-					product.decreaseQuantity(quantity);
-					totalPrice += product.getPrice() * quantity;
-					System.out.println(product.getProduct_id() + " e kupen uspeshno!");
+				if (product.getQuantity() < quantity) {
+					System.out.println("Nqmame dostatychno nalichnost!");
+					quantity = this.checkProductQuantity(product);
+					if (quantity != 0) {
+						product.decreaseQuantity(quantity);
+						totalPrice += product.getPrice() * quantity;
+						System.out.println(product.getProduct_id() + " e kupen uspeshno!");
+					} else {
+						this.products.remove(product);
+						System.out.println("Product removed from cart");
+					}
 				} else {
-					this.products.remove(product);
-					System.out.println("Product removed from cart");
+					totalPrice += product.getPrice() * quantity;
+					product.decreaseQuantity(quantity);
+					System.out.println(product.getProduct_id() + " e kupen uspeshno!");
 				}
-			} else {
-				totalPrice += product.getPrice() * quantity;
-				product.decreaseQuantity(quantity);
-				System.out.println(product.getProduct_id() + " e kupen uspeshno!");
-			}
-			if (product.getQuantity() == 0) {
-				productStorage.getDistributor().orderProduct(product, new Random().nextInt(10) + 1);
-				synchronized (productStorage) {
-					productStorage.notifyAll();
+				if (product.getQuantity() == 0) {
+					productStorage.getDistributor().orderProduct(product, new Random().nextInt(10) + 1);
+					synchronized (productStorage) {
+						productStorage.notifyAll();
+					}
 				}
+				System.out.println(product);
 			}
-			System.out.println(product);
-		}
-		Order order = new Order(this.products, totalPrice);
-		productStorage.addOrder(user, order);
+			Order order = new Order(this.products, totalPrice);
+			productStorage.addOrder(user, order);
 
-		synchronized (productStorage) {
-			productStorage.notifyAll();
 		}
-
 		this.products.clear();
+
+//		synchronized (productStorage) {
+//			productStorage.notifyAll();
+//		}
+
 	}
 
 	public void showProductsInTheCart() {
+		float totalPrice = 0;
 		if (this.products.isEmpty()) {
 			System.out.println("Your shopping cart is empty!");
 		} else {
 			for (Entry<Product, Integer> entry : this.products.entrySet()) {
 				System.out.println(entry.getKey() + " " + entry.getValue());
+				totalPrice += entry.getKey().getPrice() * entry.getValue();
 			}
+			System.out.println("Total price: " + String.format("%.2f", totalPrice));
 		}
+
 	}
 
 	public void addProduct(Product product, int quantity) {
@@ -147,4 +164,5 @@ public class ShoppingCart {
 		}
 		return 0;
 	}
+
 }

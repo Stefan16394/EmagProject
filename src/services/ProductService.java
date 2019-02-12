@@ -24,6 +24,7 @@ import products.CategoryStorage;
 import products.Product;
 import products.ProductCategories;
 import storage.ProductStorage;
+import users.Message;
 import users.User;
 
 public class ProductService {
@@ -35,7 +36,7 @@ public class ProductService {
 		this.categoryStorage = new CategoryStorage();
 	}
 
-	public void createProduct() {
+	public Message createProduct() {
 		System.out.println("Choose category:");
 		for (Entry<Integer, ProductCategories> category : this.categoryStorage.getCategories().entrySet()) {
 			System.out.println(category.getKey() + " - " + category.getValue());
@@ -60,13 +61,15 @@ public class ProductService {
 
 				float price = new Random().nextFloat() * 100;
 				int quantity = new Random().nextInt(20) + 1;
-				Product product = new Product(price, quantity, null);
+				Product product = new Product(subCat, price, quantity);
 				System.out.println(product);
 				this.productStorage.addProduct(category, subCat, product);
+				return new Message("Hello! Come to our site and see our new amazing and fantastic product: \n  " + product);
 			} else {
 				System.out.println(("Invalid entry. Please try again."));
 			}
 		}
+		return null;
 	}
 
 	private ProductCategories chooseCategory() {
@@ -199,7 +202,7 @@ public class ProductService {
 //								characteristics.put(s1, s2);
 //						}
 //					}
-					Product product = new Product(price, quantity, Collections.unmodifiableMap(characteristics));
+					Product product = new Product(subC, price, quantity);
 					productStorage.addProduct(category, subC, product);
 				}
 			}

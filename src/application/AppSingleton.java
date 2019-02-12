@@ -1,6 +1,8 @@
 package application;
 
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 import factories.UserFactory;
 import services.ProductService;
@@ -8,6 +10,8 @@ import services.UserService;
 import storage.ProductStorage;
 import storage.UserStorage;
 import suppliers.Distributor;
+import users.IObserver;
+import users.Message;
 import users.User;
 
 public class AppSingleton {
@@ -26,6 +30,7 @@ public class AppSingleton {
 		private ProductService productService;
 		private ProductStorage productStorage;
 		private User currentUser;
+		private Set<IObserver> observers;
 
 		private App() {
 			this.productStorage = new ProductStorage();
@@ -34,8 +39,13 @@ public class AppSingleton {
 			this.productService.setProductStorage(this.productStorage);
 			this.userService = new UserService();
 			this.userStorage = new UserStorage();
+			this.observers = new HashSet<IObserver>();
 		}
 
+		public void notifyObservers(Message message) {
+			this.observers.forEach(o -> o.react(message));
+		}
+		
 		public void startApp() {
 			Scanner sc = new Scanner(System.in);
 
@@ -58,7 +68,10 @@ public class AppSingleton {
 					String command = sc.nextLine();
 					switch (command) {
 					case "1":
-						this.productService.createProduct();
+						Message message = this.productService.createProduct();
+						if(message != null) {
+							this.notifyObservers(message);
+						}
 						break;
 					case "3":
 						if (this.currentUser != null) {
@@ -75,14 +88,17 @@ public class AppSingleton {
 				} else {
 					System.out.println("Enter command: 1 - register User, 2 - log in,"
 							+ " 3 - Find Product By Category, 4 - Delete account, 5 - Log out,"
-							+ " 6 - Check out the things in your cart");
+							+ " 6 - Check out the things in your cart, 7 - Check your messages");
 					String command = sc.nextLine();
 					switch (command) {
 					case "1":
-						this.userService.register(this.userStorage);
+						User user = this.userService.register(this.userStorage);
+						if(user!=null) {
+							this.observers.add(user);
+						}
 						break;
 					case "2":
-						User user = this.userService.login(this.userStorage);
+						user = this.userService.login(this.userStorage);
 						if (user != null) {
 							this.currentUser = user;
 							System.out.println("You logged in successfully!");
@@ -95,6 +111,7 @@ public class AppSingleton {
 						break;
 					case "4":
 						if (this.currentUser != null) {
+							this.observers.remove(this.currentUser);
 							this.userService.deleteAccount(this.userStorage, this.currentUser);
 						} else {
 							System.out.println("First you need to log in!");
@@ -113,6 +130,11 @@ public class AppSingleton {
 							this.productService.checkShoppingCart(this.currentUser);
 						} else {
 							System.out.println("First you need to log in!");
+						}
+						break;
+					case "7":
+						if (this.currentUser != null) {
+							this.currentUser.checkMessages();
 						}
 						break;
 					default:
