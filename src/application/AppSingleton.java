@@ -9,6 +9,7 @@ import services.ProductService;
 import services.UserService;
 import storage.ProductStorage;
 import storage.UserStorage;
+import suppliers.DeliverService;
 import suppliers.Distributor;
 import users.IObserver;
 import users.Message;
@@ -59,6 +60,7 @@ public class AppSingleton {
 			this.userStorage.registerUser(UserFactory.createUser("admin@emag.bg", "admin", true));
 			this.userStorage.registerUser(UserFactory.createUser("a@a.bg", "1234", false));
 			this.currentUser = this.userStorage.logIn("a@a.bg","1234");
+			new DeliverService(this.productStorage.getOrdersStorage().getForDelivery()).start();
 			
 
 			while (true) {

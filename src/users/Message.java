@@ -22,8 +22,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(this.date ) + " - " + this.message; 
-		
+		return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(this.date ) + " - " + this.message; 	
 	}
 	
 	

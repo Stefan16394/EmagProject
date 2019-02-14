@@ -18,6 +18,7 @@ public class Product {
 	private static final int MAX_COUNT_OF_MONTHS = 12;
 	private static final int MIN_YEAR = 2015;
 	private static final int MAX_YEAR = 2019;
+	
 	private int product_id;
 	private Map<String, String> characteristics;
 	private float price;

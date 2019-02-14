@@ -26,6 +26,7 @@ import products.ProductCategories;
 import storage.ProductStorage;
 import users.Message;
 import users.User;
+import utilities.Helper;
 
 public class ProductService {
 	private static Scanner sc = new Scanner(System.in);;
@@ -44,7 +45,7 @@ public class ProductService {
 		int input = sc.nextInt();
 
 		if (!this.categoryStorage.getCategories().containsKey(input)) {
-			System.out.println(("Invalid entry. Please try again."));
+			System.out.println("Invalid entry. Please try again.");
 		} else {
 			ProductCategories category = this.categoryStorage.getCategories().get(input);
 			if (category != null) {
@@ -58,7 +59,6 @@ public class ProductService {
 			String subCat = subCategories.get(input2);
 			if (subCat != null) {
 				System.out.println(subCat);
-
 				float price = new Random().nextFloat() * 100;
 				int quantity = new Random().nextInt(20) + 1;
 				Product product = new Product(subCat, price, quantity);
@@ -78,7 +78,7 @@ public class ProductService {
 			for (Entry<Integer, ProductCategories> category : this.categoryStorage.getCategories().entrySet()) {
 				System.out.println(category.getKey() + " - " + category.getValue());
 			}
-			int input = sc.nextInt();
+			int input = Helper.commandInput();
 			ProductCategories category = this.categoryStorage.getCategories().get(input);
 			if (category == null) {
 				System.out.println("There is no such category!");
@@ -95,8 +95,8 @@ public class ProductService {
 				System.out.println(entry.getKey() + " - " + entry.getValue());
 			}
 			System.out.println("Choose subcategory:");
-			int input2 = sc.nextInt();
-			String subCategory = subCategories.get(input2);
+			int input= Helper.commandInput();
+			String subCategory = subCategories.get(input);
 			if (subCategory == null) {
 				System.out.println("There is no such subcategory!");
 			} else {
@@ -111,7 +111,6 @@ public class ProductService {
 
 		String subCategory = chooseSubcategory(category);
 
-		sc.nextLine();
 		System.out.println("Choose sort criteria:");
 		System.out.println("1 -> price - ascending order");
 		System.out.println("2 -> price - descending order");
@@ -134,8 +133,6 @@ public class ProductService {
 		List<Product> products = this.productStorage.findProductsByCategoryAndSubcategory(category, subCategory).stream()
 				.sorted(comparator).collect(Collectors.toList());
 
-		
-
 		while (true) {
 			System.out.println("Products in category " + subCategory + ":");
 			for (Iterator<Product> it = products.iterator(); it.hasNext();) {
@@ -145,8 +142,7 @@ public class ProductService {
 			
 			System.out.println("Choose product by id:");
 			System.out.println("For exit press '0'");
-			int id = sc.nextInt();
-			sc.nextLine();
+			int id = Helper.commandInput();
 			if(id == 0) {
 				return;
 			}
@@ -158,6 +154,7 @@ public class ProductService {
 					if (user != null) {
 						System.out.println("Enter quantity:");
 						int quantity = sc.nextInt();
+						sc.nextLine();
 						user.getCart().addProduct(product.get(), quantity);
 					} else {
 						System.out.println("You need to log in first!");

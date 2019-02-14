@@ -10,6 +10,7 @@ import java.util.Scanner;
 import products.Order;
 import products.Product;
 import storage.ProductStorage;
+import utilities.Helper;
 
 public class ShoppingCart {
 	private Map<Product, Integer> products;
@@ -26,7 +27,7 @@ public class ShoppingCart {
 			while (true) {
 				showProductsInTheCart();
 				System.out.println("Enter id! Press 0 for exit!");
-				int id = sc.nextInt();
+				int id = Helper.commandInput();
 				if (id == 0) {
 					return;
 				}
@@ -48,7 +49,7 @@ public class ShoppingCart {
 			while (true) {
 				showProductsInTheCart();
 				System.out.println("Enter id! Press 0 for exit!");
-				int id = sc.nextInt();
+				int id = Helper.commandInput();
 				if (id == 0) {
 					return;
 				}
@@ -112,11 +113,6 @@ public class ShoppingCart {
 
 		}
 		this.products.clear();
-
-//		synchronized (productStorage) {
-//			productStorage.notifyAll();
-//		}
-
 	}
 
 	public void showProductsInTheCart() {

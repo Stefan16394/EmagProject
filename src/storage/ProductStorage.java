@@ -1,6 +1,5 @@
 package storage;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -65,5 +64,9 @@ public class ProductStorage {
 
 	public void setDistributor(Distributor distributor) {
 		this.distributor = distributor;
+	}
+
+	public OrdersStorage getOrdersStorage() {
+		return ordersStorage;
 	}
 }
