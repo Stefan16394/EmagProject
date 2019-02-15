@@ -33,7 +33,7 @@ public class OrdersStorage {
 		System.out.println("Order created succesfully!");
 	}
 
-	public void listUserOrders(User user) {
+	public Deque<Order> listUserOrders(User user) {
 		if (!this.orders.containsKey(user) || this.orders.get(user).isEmpty()) {
 			System.out.println("You have no orders!");
 		} else {
@@ -41,7 +41,9 @@ public class OrdersStorage {
 			for (Order o : orders) {
 				System.out.println(o);
 			}
+			return orders;
 		}
+		return null;
 	}
 
 	public Set<Order> getForDelivery() {

@@ -57,7 +57,7 @@ public class ShoppingCart {
 				if (product.isPresent()) {
 					Product p = product.get();
 					System.out.println("Enter new quantity: ");
-					int newQuantity = sc.nextInt();
+					int newQuantity = Helper.commandInput();
 					if (p.getQuantity() < newQuantity) {
 						newQuantity = this.checkProductQuantity(p);
 					}

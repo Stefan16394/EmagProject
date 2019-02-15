@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<productStorage>
+  <category>PHONES_TABLETS_LAPTOPS
+    <subcategory>LAPTOPS
+      <products>
+        <product/>Product: subcategory - LAPTOPS price = 96.70, id = 15, rate= 5.0, quantity = 11, creationDate = 2018-01-07 Some more characteristics: display - 11 model - Acer Swift SF114
+        <product/>Product: subcategory - LAPTOPS price = 47.12, id = 14, rate= 1.0, quantity = 13, creationDate = 2019-03-08 Some more characteristics: display - 13 model - Apple MacBook 13
+        <product/>Product: subcategory - LAPTOPS price = 17.40, id = 12, rate= 5.0, quantity = 13, creationDate = 2017-08-05 Some more characteristics: display - 13 model - Apple MacBook 13
+        <product/>Product: subcategory - LAPTOPS price = 48.60, id = 11, rate= 1.0, quantity = 18, creationDate = 2017-04-23 Some more characteristics: display - 15 model - Lenovo Legion Y639
+        <product/>Product: subcategory - LAPTOPS price = 9.35, id = 13, rate= 4.0, quantity = 20, creationDate = 2015-08-28 Some more characteristics: display - 14 model - HP Omen 15dr991
+      </products>
+    </subcategory>
+    <subcategory>PHONES
+      <products>
+        <product/>Product: subcategory - PHONES price = 51.03, id = 5, rate= 1.0, quantity = 12, creationDate = 2016-07-09 Some more characteristics: 
+        <product/>Product: subcategory - PHONES price = 88.99, id = 1, rate= 5.0, quantity = 11, creationDate = 2017-02-09 Some more characteristics: 
+        <product/>Product: subcategory - PHONES price = 65.79, id = 2, rate= 3.0, quantity = 18, creationDate = 2015-09-12 Some more characteristics: 
+        <product/>Product: subcategory - PHONES price = 57.23, id = 4, rate= 0.0, quantity = 3, creationDate = 2016-12-25 Some more characteristics: 
+        <product/>Product: subcategory - PHONES price = 35.60, id = 3, rate= 5.0, quantity = 10, creationDate = 2016-12-11 Some more characteristics:
+      </products>
+    </subcategory>
+    <subcategory>TABLETS
+      <products>
+        <product/>Product: subcategory - TABLETS price = 8.09, id = 10, rate= 4.0, quantity = 2, creationDate = 2015-07-12 Some more characteristics: 
+        <product/>Product: subcategory - TABLETS price = 20.91, id = 8, rate= 0.0, quantity = 4, creationDate = 2019-12-02 Some more characteristics: 
+        <product/>Product: subcategory - TABLETS price = 40.57, id = 6, rate= 2.0, quantity = 5, creationDate = 2016-03-09 Some more characteristics: 
+        <product/>Product: subcategory - TABLETS price = 15.85, id = 7, rate= 0.0, quantity = 1, creationDate = 2015-02-14 Some more characteristics: 
+        <product/>Product: subcategory - TABLETS price = 30.25, id = 9, rate= 1.0, quantity = 14, creationDate = 2019-05-04 Some more characteristics:
+      </products>
+    </subcategory>
+  </category>
+  <category>COMPUTERS
+    <subcategory>DESKTOP_COMPUTERS_MONITORS
+      <products>
+        <product/>Product: subcategory - DESKTOP_COMPUTERS_MONITORS price = 14.20, id = 62, rate= 2.0, quantity = 17, creationDate = 2015-08-15 Some more characteristics: 
+        <product/>Product: subcategory - DESKTOP_COMPUTERS_MONITORS price = 40.18, id = 63, rate= 0.0, quantity = 16, creationDate = 2015-01-04 Some more characteristics: 
+        <product/>Product: subcategory - DESKTOP_COMPUTERS_MONITORS price = 65.65, id = 65, rate= 2.0, quantity = 10, creationDate = 2018-02-05 Some more characteristics: 
+        <product/>Product: subcategory - DESKTOP_COMPUTERS_MONITORS price = 97.56, id = 61, rate= 0.0, quantity = 10, creationDate = 2018-10-20 Some more characteristics: 
+        <product/>Product: subcategory - DESKTOP_COMPUTERS_MONITORS price = 91.72, id = 64, rate= 3.0, quantity = 19, creationDate = 2018-01-01 Some more characteristics:
+      </products>
+    </subcategory>
+    <subcategory>PC_COMPONENTS
+      <products>
+        <product/>Product: subcategory - PC_COMPONENTS price = 77.43, id = 67, rate= 0.0, quantity = 18, creationDate = 2015-06-06 Some more characteristics: 
+        <product/>Product: subcategory - PC_COMPONENTS price = 15.01, id = 68, rate= 2.0, quantity = 9, creationDate = 2019-07-01 Some more characteristics: 
+        <product/>Product: subcategory - PC_COMPONENTS price = 88.79, id = 70, rate= 0.0, quantity = 10, creationDate = 2019-08-28 Some more characteristics: 
+        <product/>Product: subcategory - PC_COMPONENTS price = 63.74, id = 69, rate= 1.0, quantity = 18, creationDate = 2017-03-08 Some more characteristics: 
+        <product/>Product: subcategory - PC_COMPONENTS price = 72.58, id = 66, rate= 2.0, quantity = 5, creationDate = 2018-03-18 Some more characteristics:
+      </products>
+    </subcategory>
+    <subcategory>SOFTUER
+      <products>
+        <product/>Product: subcategory - SOFTUER price = 0.80, id = 74, rate= 3.0, quantity = 7, creationDate = 2017-05-17 Some more characteristics: 
+        <product/>Product: subcategory - SOFTUER price = 21.17, id = 72, rate= 5.0, quantity = 19, creationDate = 2017-06-23 Some more characteristics: 
+        <product/>Product: subcategory - SOFTUER price = 47.29, id = 71, rate= 0.0, quantity = 5, creationDate = 2017-05-03 Some more characteristics: 
+        <product/>Product: subcategory - SOFTUER price = 43.03, id = 75, rate= 1.0, quantity = 10, creationDate = 2016-02-09 Some more characteristics: 
+        <product/>Product: subcategory - SOFTUER price = 98.84, id = 73, rate= 2.0, quantity = 20, creationDate = 2018-10-09 Some more characteristics:
+      </products>
+    </subcategory>
+  </category>
+  <category>TV_AUDIO_FOTO
+    <subcategory>ELECTRONICS
+      <products>
+        <product/>Product: subcategory - ELECTRONICS price = 48.51, id = 29, rate= 2.0, quantity = 18, creationDate = 2018-03-27 Some more characteristics: 
+        <product/>Product: subcategory - ELECTRONICS price = 16.39, id = 27, rate= 2.0, quantity = 19, creationDate = 2016-02-19 Some more characteristics: 
+        <product/>Product: subcategory - ELECTRONICS price = 68.99, id = 26, rate= 3.0, quantity = 11, creationDate = 2016-05-19 Some more characteristics: 
+        <product/>Product: subcategory - ELECTRONICS price = 67.88, id = 28, rate= 0.0, quantity = 7, creationDate = 2017-03-10 Some more characteristics: 
+        <product/>Product: subcategory - ELECTRONICS price = 45.23, id = 30, rate= 5.0, quantity = 10, creationDate = 2016-10-28 Some more characteristics:
+      </products>
+    </subcategory>
+    <subcategory>FOTO_VIDEO
+      <products>
+        <product/>Product: subcategory - FOTO_VIDEO price = 16.48, id = 31, rate= 4.0, quantity = 13, creationDate = 2017-02-18 Some more characteristics: 
+        <product/>Product: subcategory - FOTO_VIDEO price = 76.53, id = 33, rate= 4.0, quantity = 4, creationDate = 2017-12-02 Some more characteristics: 
+        <product/>Product: subcategory - FOTO_VIDEO price = 13.91, id = 34, rate= 1.0, quantity = 12, creationDate = 2015-04-23 Some more characteristics: 
+        <product/>Product: subcategory - FOTO_VIDEO price = 74.19, id = 32, rate= 3.0, quantity = 2, creationDate = 2015-04-06 Some more characteristics: 
+        <product/>Product: subcategory - FOTO_VIDEO price = 85.42, id = 35, rate= 0.0, quantity = 17, creationDate = 2018-04-10 Some more characteristics:
+      </products>
+    </subcategory>
+    <subcategory>HOME_CINEMA_AUDIO
+      <products>
+        <product/>Product: subcategory - HOME_CINEMA_AUDIO price = 28.82, id = 25, rate= 4.0, quantity = 9, creationDate = 2015-07-19 Some more characteristics: 
+        <product/>Product: subcategory - HOME_CINEMA_AUDIO price = 98.58, id = 22, rate= 3.0, quantity = 11, creationDate = 2019-06-12 Some more characteristics: 
+        <product/>Product: subcategory - HOME_CINEMA_AUDIO price = 37.31, id = 23, rate= 5.0, quantity = 8, creationDate = 2017-01-17 Some more characteristics: 
+        <product/>Product: subcategory - HOME_CINEMA_AUDIO price = 77.54, id = 21, rate= 2.0, quantity = 9, creationDate = 2015-04-01 Some more characteristics: 
+        <product/>Product: subcategory - HOME_CINEMA_AUDIO price = 87.39, id = 24, rate= 0.0, quantity = 12, creationDate = 2016-01-18 Some more characteristics:
+      </products>
+    </subcategory>
+    <subcategory>TVS
+      <products>
+        <product/>Product: subcategory - TVS price = 88.57, id = 18, rate= 1.0, quantity = 2, creationDate = 2017-05-06 Some more characteristics: 
+        <product/>Product: subcategory - TVS price = 50.77, id = 17, rate= 0.0, quantity = 16, creationDate = 2015-07-28 Some more characteristics: 
+        <product/>Product: subcategory - TVS price = 97.44, id = 16, rate= 1.0, quantity = 12, creationDate = 2017-12-01 Some more characteristics: 
+        <product/>Product: subcategory - TVS price = 92.65, id = 19, rate= 2.0, quantity = 6, creationDate = 2018-08-21 Some more characteristics: 
+        <product/>Product: subcategory - TVS price = 79.33, id = 20, rate= 0.0, quantity = 6, creationDate = 2017-04-12 Some more characteristics:
+      </products>
+    </subcategory>
+  </category>
+  <category>HEALTH_BEAUTY
+    <subcategory>ACCESSORIES
+      <products>
+        <product/>Product: subcategory - ACCESSORIES price = 54.24, id = 57, rate= 4.0, quantity = 19, creationDate = 2018-12-19 Some more characteristics: 
+        <product/>Product: subcategory - ACCESSORIES price = 11.69, id = 59, rate= 0.0, quantity = 7, creationDate = 2018-01-10 Some more characteristics: 
+        <product/>Product: subcategory - ACCESSORIES price = 84.94, id = 56, rate= 2.0, quantity = 11, creationDate = 2018-06-22 Some more characteristics: 
+        <product/>Product: subcategory - ACCESSORIES price = 48.58, id = 60, rate= 0.0, quantity = 3, creationDate = 2017-01-28 Some more characteristics: 
+        <product/>Product: subcategory - ACCESSORIES price = 34.73, id = 58, rate= 4.0, quantity = 9, creationDate = 2017-07-06 Some more characteristics:
+      </products>
+    </subcategory>
+    <subcategory>COSMETICS
+      <products>
+        <product/>Product: subcategory - COSMETICS price = 67.22, id = 53, rate= 3.0, quantity = 18, creationDate = 2017-02-21 Some more characteristics: 
+        <product/>Product: subcategory - COSMETICS price = 62.94, id = 55, rate= 4.0, quantity = 2, creationDate = 2018-01-25 Some more characteristics: 
+        <product/>Product: subcategory - COSMETICS price = 17.54, id = 54, rate= 5.0, quantity = 16, creationDate = 2019-02-28 Some more characteristics: 
+        <product/>Product: subcategory - COSMETICS price = 81.04, id = 51, rate= 4.0, quantity = 13, creationDate = 2018-05-16 Some more characteristics: 
+        <product/>Product: subcategory - COSMETICS price = 4.34, id = 52, rate= 4.0, quantity = 18, creationDate = 2015-09-04 Some more characteristics:
+      </products>
+    </subcategory>
+    <subcategory>HEALTH_WELLNESS
+      <products>
+        <product/>Product: subcategory - HEALTH_WELLNESS price = 53.73, id = 46, rate= 5.0, quantity = 2, creationDate = 2015-10-03 Some more characteristics: 
+        <product/>Product: subcategory - HEALTH_WELLNESS price = 93.14, id = 49, rate= 1.0, quantity = 11, creationDate = 2018-06-27 Some more characteristics: 
+        <product/>Product: subcategory - HEALTH_WELLNESS price = 86.39, id = 48, rate= 4.0, quantity = 20, creationDate = 2019-11-15 Some more characteristics: 
+        <product/>Product: subcategory - HEALTH_WELLNESS price = 72.90, id = 47, rate= 1.0, quantity = 6, creationDate = 2016-03-20 Some more characteristics: 
+        <product/>Product: subcategory - HEALTH_WELLNESS price = 68.76, id = 50, rate= 2.0, quantity = 6, creationDate = 2016-10-20 Some more characteristics:
+      </products>
+    </subcategory>
+    <subcategory>MAKEUP_MANICURE
+      <products>
+        <product/>Product: subcategory - MAKEUP_MANICURE price = 83.40, id = 45, rate= 2.0, quantity = 7, creationDate = 2015-08-11 Some more characteristics: 
+        <product/>Product: subcategory - MAKEUP_MANICURE price = 42.60, id = 44, rate= 3.0, quantity = 4, creationDate = 2015-12-14 Some more characteristics: 
+        <product/>Product: subcategory - MAKEUP_MANICURE price = 68.65, id = 43, rate= 4.0, quantity = 3, creationDate = 2018-11-09 Some more characteristics: 
+        <product/>Product: subcategory - MAKEUP_MANICURE price = 32.02, id = 41, rate= 0.0, quantity = 14, creationDate = 2015-06-17 Some more characteristics: 
+        <product/>Product: subcategory - MAKEUP_MANICURE price = 44.44, id = 42, rate= 4.0, quantity = 4, creationDate = 2019-07-19 Some more characteristics:
+      </products>
+    </subcategory>
+    <subcategory>PARFUMES
+      <products>
+        <product/>Product: subcategory - PARFUMES price = 59.24, id = 36, rate= 1.0, quantity = 9, creationDate = 2018-11-14 Some more characteristics: 
+        <product/>Product: subcategory - PARFUMES price = 96.07, id = 39, rate= 0.0, quantity = 10, creationDate = 2017-02-01 Some more characteristics: 
+        <product/>Product: subcategory - PARFUMES price = 68.74, id = 40, rate= 1.0, quantity = 16, creationDate = 2017-03-09 Some more characteristics: 
+        <product/>Product: subcategory - PARFUMES price = 75.87, id = 38, rate= 2.0, quantity = 10, creationDate = 2016-11-01 Some more characteristics: 
+        <product/>Product: subcategory - PARFUMES price = 83.34, id = 37, rate= 0.0, quantity = 17, creationDate = 2018-02-10 Some more characteristics:
+      </products>
+    </subcategory>
+  </category>
+</productStorage>

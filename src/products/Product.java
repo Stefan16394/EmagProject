@@ -40,8 +40,6 @@ public class Product {
 		this.setCharacteristics();
 	}
 
-	
-
 	public void setCharacteristics() {
 		String[] laptopModels = { "Acer 13gx", "Toshiba Satelite c855", "Toshiba Satelite E583", "Asus Rogx1337",
 				"HP Omen 15dr991", "Lenovo Legion Y639", "Dell G3", "Acer Swift SF114", "Apple MacBook 13" };

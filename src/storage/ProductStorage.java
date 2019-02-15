@@ -1,5 +1,6 @@
 package storage;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -68,5 +69,9 @@ public class ProductStorage {
 
 	public OrdersStorage getOrdersStorage() {
 		return ordersStorage;
+	}
+
+	public Map<ProductCategories, Map<String, Set<Product>>> getProducts() {
+		return Collections.unmodifiableMap(products);
 	}
 }

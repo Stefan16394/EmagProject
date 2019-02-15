@@ -1,10 +1,13 @@
 package application;
 
+import java.util.Deque;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
 import factories.UserFactory;
+import files.Files;
+import products.Order;
 import services.ProductService;
 import services.UserService;
 import storage.ProductStorage;
@@ -17,14 +20,14 @@ import users.User;
 
 public class AppSingleton {
 	private static App application;
-	
+
 	public static App getInstance() {
-		if(application==null) {
+		if (application == null) {
 			application = new App();
 		}
 		return application;
 	}
-	
+
 	public static class App {
 		private UserService userService;
 		private UserStorage userStorage;
@@ -46,7 +49,7 @@ public class AppSingleton {
 		public void notifyObservers(Message message) {
 			this.observers.forEach(o -> o.react(message));
 		}
-		
+
 		public void startApp() {
 			Scanner sc = new Scanner(System.in);
 
@@ -59,29 +62,35 @@ public class AppSingleton {
 //			this.productStorage.listAllProducts();
 			this.userStorage.registerUser(UserFactory.createUser("admin@emag.bg", "admin", true));
 			this.userStorage.registerUser(UserFactory.createUser("a@a.bg", "1234", false));
-			this.currentUser = this.userStorage.logIn("a@a.bg","1234");
+			this.currentUser = this.userStorage.logIn("a@a.bg", "1234");
 			new DeliverService(this.productStorage.getOrdersStorage().getForDelivery()).start();
-			
 
 			while (true) {
 				if (this.currentUser != null && this.currentUser.isAdmin()) {
 					System.out.println();
-					System.out.println("1 - Add product, 2 - Delete product, 3 - Log out");
+					System.out.println("1 - Add product, 2 - Log out"
+							+ ", 3 - list all products with JSON, 4 - list all products with XML");
 					String command = sc.nextLine();
 					switch (command) {
 					case "1":
 						Message message = this.productService.createProduct();
-						if(message != null) {
+						if (message != null) {
 							this.notifyObservers(message);
 						}
 						break;
-					case "3":
+					case "2":
 						if (this.currentUser != null) {
 							this.currentUser = null;
 							System.out.println("You logged out successfully!");
 						} else {
 							System.out.println("First you need to log in!");
 						}
+						break;
+					case "3":
+						Files.adminJSON(this.productStorage);
+						break;
+					case "4":
+						Files.makeXML(this.productStorage);
 						break;
 					default:
 						System.out.println("Invalid command!");
@@ -90,12 +99,13 @@ public class AppSingleton {
 				} else {
 					System.out.println("Enter command: 1 - register User, 2 - log in,"
 							+ " 3 - Find Product By Category, 4 - Delete account, 5 - Log out,"
-							+ " 6 - Check out the things in your cart, 7 - Check your messages");
+							+ " 6 - Check out the things in your cart, 7 - Check your messages "
+							+ ", 8 - Print orders");
 					String command = sc.nextLine();
 					switch (command) {
 					case "1":
 						User user = this.userService.register(this.userStorage);
-						if(user!=null) {
+						if (user != null) {
 							this.observers.add(user);
 						}
 						break;
@@ -137,6 +147,16 @@ public class AppSingleton {
 					case "7":
 						if (this.currentUser != null) {
 							this.currentUser.checkMessages();
+						}
+						break;
+					case "8":
+						if (this.currentUser != null) {
+							Deque<Order> orders=this.productStorage.getOrdersStorage().listUserOrders(this.currentUser);
+							if(orders!=null) {
+								Files.userJSON(orders);
+							}
+						} else {
+							System.out.println("First you need to log in!");
 						}
 						break;
 					default:

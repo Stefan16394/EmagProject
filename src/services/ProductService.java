@@ -153,8 +153,10 @@ public class ProductService {
 				if (answer.equals("y")) {
 					if (user != null) {
 						System.out.println("Enter quantity:");
-						int quantity = sc.nextInt();
-						sc.nextLine();
+						int quantity = Helper.commandInput();
+						if(quantity == 0) {
+							continue;
+						}
 						user.getCart().addProduct(product.get(), quantity);
 					} else {
 						System.out.println("You need to log in first!");

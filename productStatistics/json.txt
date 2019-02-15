@@ -1,0 +1,16 @@
+[
+  {
+    "products": {
+      "Product: subcategory - ELECTRONICS price \u003d 28.83, id \u003d 27, rate\u003d 2.0, quantity \u003d 7, creationDate \u003d 2015-02-03 Some more characteristics: ": 2,
+      "Product: subcategory - ELECTRONICS price \u003d 57.29, id \u003d 26, rate\u003d 0.0, quantity \u003d 1, creationDate \u003d 2018-12-10 Some more characteristics: ": 10,
+      "Product: subcategory - ELECTRONICS price \u003d 73.77, id \u003d 30, rate\u003d 3.0, quantity \u003d 8, creationDate \u003d 2018-11-14 Some more characteristics: ": 10
+    },
+    "totalPrice": 1368.2476,
+    "orderStatus": "DELIVERED",
+    "dateOfOrder": {
+      "year": 2019,
+      "month": 2,
+      "day": 15
+    }
+  }
+]
