@@ -23,12 +23,10 @@ public class DeliverService extends Thread {
 	public void run() {
 		while (true) {
 			while (this.forDelivery.isEmpty()) {
-				System.out.println("[Deliverers] shte chakam porachki");
 				synchronized (this.forDelivery) {
 					try {
 						this.forDelivery.wait();
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

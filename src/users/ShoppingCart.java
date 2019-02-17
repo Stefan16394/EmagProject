@@ -13,6 +13,9 @@ import storage.ProductStorage;
 import utilities.Helper;
 
 public class ShoppingCart {
+	private static final int MAX_RATE = 5;
+	private static final int MIN_RATE = 1;
+	private static final int QUANTITY_TO_DELIVER = 10;
 	private Map<Product, Integer> products;
 	private Scanner sc = new Scanner(System.in);
 
@@ -85,12 +88,12 @@ public class ShoppingCart {
 				int quantity = entry.getValue();
 
 				if (product.getQuantity() < quantity) {
-					System.out.println("Nqmame dostatychno nalichnost!");
+					System.out.println("There is not enough quantity!");
 					quantity = this.checkProductQuantity(product);
 					if (quantity != 0) {
 						product.decreaseQuantity(quantity);
 						totalPrice += product.getPrice() * quantity;
-						System.out.println(product.getProduct_id() + " e kupen uspeshno!");
+						System.out.println(product.getProduct_id() + " is bought successfully!");
 					} else {
 						this.products.remove(product);
 						System.out.println("Product removed from cart");
@@ -98,15 +101,15 @@ public class ShoppingCart {
 				} else {
 					totalPrice += product.getPrice() * quantity;
 					product.decreaseQuantity(quantity);
-					System.out.println(product.getProduct_id() + " e kupen uspeshno!");
+					System.out.println(product.listCharacteristics() + " is bought successfully\n");
 				}
 				if (product.getQuantity() == 0) {
-					productStorage.getDistributor().orderProduct(product, new Random().nextInt(10) + 1);
+					productStorage.getDistributor().orderProduct(product,
+							new Random().nextInt(QUANTITY_TO_DELIVER) + 1);
 					synchronized (productStorage) {
 						productStorage.notifyAll();
 					}
 				}
-				System.out.println(product);
 			}
 			Order order = new Order(this.products, totalPrice);
 			productStorage.addOrder(user, order);
@@ -121,8 +124,9 @@ public class ShoppingCart {
 			System.out.println("Your shopping cart is empty!");
 		} else {
 			for (Entry<Product, Integer> entry : this.products.entrySet()) {
-				System.out.println(entry.getKey() + " " + entry.getValue());
+				System.out.println(entry.getKey() + "The quantity in your cart: " + entry.getValue());
 				totalPrice += entry.getKey().getPrice() * entry.getValue();
+				System.out.println();
 			}
 			System.out.println("Total price: " + String.format("%.2f", totalPrice));
 		}
@@ -132,7 +136,7 @@ public class ShoppingCart {
 	public void addProduct(Product product, int quantity) {
 		if (this.products.containsKey(product)) {
 			if (product.getQuantity() < this.products.get(product) + quantity) {
-				System.out.println("Nqmame dostatychno nalichnost za da dobavite kym porychkata si!");
+				System.out.println("There is not enough quantity to add in your cart!");
 				if (this.products.get(product) + quantity - product.getQuantity() > 0) {
 					quantity = this.checkProductQuantity(product);
 				}
@@ -150,9 +154,33 @@ public class ShoppingCart {
 		}
 	}
 
+	public void rateSomeProduct() {
+		this.showProductsInTheCart();
+		System.out.println("Enter id! Press 0 for exit!");
+		int id = Helper.commandInput();
+		if (id == 0) {
+			return;
+		}
+		Optional<Product> product = products.keySet().stream().filter(p -> p.getProduct_id() == id).findFirst();
+		if (product.isPresent()) {
+			Product p = product.get();
+			System.out.println("Enter rate (1 - 5): ");
+			int newQuantity = Helper.commandInput();
+			boolean rating = p.rateTheProduct(newQuantity);
+			if(rating) {
+				System.out.println("Thank you for rating the product!");
+			} else {
+				System.out.println("Invalid rate!");
+			}
+		} else {
+			System.out.println("Wrong id!");
+		}
+
+	}
+
 	private int checkProductQuantity(Product product) {
-		System.out.println("Mojete da dobavite samo nalichnoto kolichestvo - " + product.getQuantity());
-		System.out.println("Jelatete li? Napishete 1 za da i 2 za ne");
+		System.out.println("You can add the available quantity - " + product.getQuantity());
+		System.out.println("Do you want to? Press 1 for yes or 2 for no: ");
 		Scanner sc = new Scanner(System.in);
 		String answer = sc.nextLine();
 		if (answer.equals("1")) {
@@ -160,5 +188,4 @@ public class ShoppingCart {
 		}
 		return 0;
 	}
-
 }

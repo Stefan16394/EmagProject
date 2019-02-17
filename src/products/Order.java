@@ -43,7 +43,6 @@ public class Order {
 		OrderStatus[] o = OrderStatus.values();
 		for (int i = 0; i < o.length; i++) {
 			if (o[i].equals(this.orderStatus) && (i + 1) < o.length) {
-				System.out.println(o[i + 1]);
 				this.orderStatus = o[i + 1];
 				break;
 			}

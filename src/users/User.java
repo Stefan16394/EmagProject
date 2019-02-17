@@ -56,17 +56,20 @@ public class User implements IObserver {
 	public ShoppingCart getCart() {
 		return cart;
 	}
-	
 
 	@Override
 	public void react(Message message) {
-		if(message != null) {
+		if (message != null) {
 			this.messages.push(message);
 		}
 	}
-	
+
 	public void checkMessages() {
-		this.messages.forEach(m -> System.out.println(m));
+		if (!this.messages.isEmpty()) {
+			this.messages.forEach(m -> System.out.println(m));
+		} else {
+			System.out.println("Your message box is empty!");
+		}
 	}
-	
+
 }

@@ -32,9 +32,6 @@ public class ProductStorage {
 		}
 
 		this.products.get(category).get(subCategory).add(product);
-		System.out.println("The product " + product + " is added successfully to category " + category + " subcategory "
-				+ subCategory);
-
 	}
 
 	public void listAllProducts() {

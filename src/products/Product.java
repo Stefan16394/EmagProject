@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class Product {
 	private static int ID = 1;
-	private static final int MIN_RATE = 0;
+	private static final int MIN_RATE = 1;
 	private static final int MAX_RATE = 5;
 	private static final int MAX_COUNT_OF_DAYS = 28;
 	private static final int MIN_COUNT_OF_DAYS = 1;
@@ -18,7 +18,7 @@ public class Product {
 	private static final int MAX_COUNT_OF_MONTHS = 12;
 	private static final int MIN_YEAR = 2015;
 	private static final int MAX_YEAR = 2019;
-	
+
 	private int product_id;
 	private Map<String, String> characteristics;
 	private float price;
@@ -27,35 +27,17 @@ public class Product {
 	private LocalDate creationDate;
 	private String subCategory;
 
-	public Product(String subCategory, float price, int quantity) {
+	public Product(String subCategory, float price, int quantity,Map<String,String> characteristics) {
 		this.subCategory = subCategory;
 		this.product_id = Product.ID++;
 		this.setPrice(price);
 		this.setQuantity(quantity);
-		this.creationDate = LocalDate.of(Helper.generateRandomNumbers(MIN_YEAR, MAX_YEAR), Helper.generateRandomNumbers(MIN_COUNT_OF_MONTHS, MAX_COUNT_OF_MONTHS),
+		this.creationDate = LocalDate.of(Helper.generateRandomNumbers(MIN_YEAR, MAX_YEAR),
+				Helper.generateRandomNumbers(MIN_COUNT_OF_MONTHS, MAX_COUNT_OF_MONTHS),
 				Helper.generateRandomNumbers(MIN_COUNT_OF_DAYS, MAX_COUNT_OF_DAYS));
 		this.rates = new HashSet<Integer>();
-		this.characteristics = new HashMap<>();
+		this.characteristics =characteristics;
 		this.rateTheProduct(Helper.generateRandomNumbers(MIN_RATE, MAX_RATE));
-		this.setCharacteristics();
-	}
-
-	public void setCharacteristics() {
-		String[] laptopModels = { "Acer 13gx", "Toshiba Satelite c855", "Toshiba Satelite E583", "Asus Rogx1337",
-				"HP Omen 15dr991", "Lenovo Legion Y639", "Dell G3", "Acer Swift SF114", "Apple MacBook 13" };
-		Map<String, Map<String, String>> map = new HashMap<>();
-		Map<String, String> laptops = new HashMap<>();
-		laptops.put("display", Helper.generateRandomNumbers(11, 15) + "");
-		laptops.put("model", laptopModels[Helper.generateRandomNumbers(0, laptopModels.length - 1)]);
-		
-		map.put(ProductCategories.PhonesTabletsLaptops.valueOf("LAPTOPS").name(), laptops);
-
-		Map<String, String> characterics = map.get(this.subCategory);
-		if (characterics != null) {
-			for (Entry<String, String> ch : characterics.entrySet()) {
-				this.characteristics.put(ch.getKey(), ch.getValue());
-			}
-		}
 	}
 
 	public LocalDate getCreationDate() {
@@ -71,10 +53,13 @@ public class Product {
 			this.price = price;
 	}
 
-	public void rateTheProduct(int rate) {
+	public boolean rateTheProduct(int rate) {
 		if (rate >= MIN_RATE && rate <= MAX_RATE) {
 			this.rates.add(rate);
+			return true;
 		}
+		
+		return false;
 	}
 
 	public float getRate() {
@@ -102,7 +87,7 @@ public class Product {
 		this.quantity -= quantity;
 	}
 
-	private String listCharacteristics() {
+	public String listCharacteristics() {
 		if (this.characteristics == null) {
 			return "";
 		}
@@ -126,7 +111,7 @@ public class Product {
 	public String toString() {
 		return "Product: subcategory - " + this.getSubCategory() + " price = " + String.format("%.2f", this.price)
 				+ ", id = " + this.product_id + ", rate= " + getRate() + ", quantity = " + quantity
-				+ ", creationDate = " + this.creationDate + " Some more characteristics: " + this.listCharacteristics();
+				+ ", creationDate = " + this.creationDate + " Some more characteristics: " + this.listCharacteristics() + "\n";
 	}
 
 	public int getProduct_id() {

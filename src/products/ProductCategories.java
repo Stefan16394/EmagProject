@@ -5,7 +5,6 @@ public enum ProductCategories{
 	COMPUTERS,
 	TV_AUDIO_FOTO,
 	HEALTH_BEAUTY;
-//	FASHION;
   
 	enum PhonesTabletsLaptops{
 		PHONES,
@@ -18,7 +17,7 @@ public enum ProductCategories{
 		PC_COMPONENTS,
 		SOFTUER
 	}
-
+	
 	enum TVAudioFoto{
 		TVS,
 		HOME_CINEMA_AUDIO,
@@ -29,7 +28,6 @@ public enum ProductCategories{
 	enum HealthBeauty{
 		PARFUMES,
 		MAKEUP_MANICURE,
-		HEALTH_WELLNESS,
 		COSMETICS,
 		ACCESSORIES
 	}

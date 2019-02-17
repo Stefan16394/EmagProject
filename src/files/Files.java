@@ -26,6 +26,12 @@ import products.ProductCategories;
 import storage.ProductStorage;
 
 public class Files {
+	private static final String PRODUCTS = "products";
+	private static final String PRODUCT = "product";
+	private static final String FILE_FORMAT = "xml.txt";
+	private static final String SUBCATEGORY = "subcategory";
+	private static final String CATEGORY = "category";
+	private static final String PRODUCT_STORAGE = "productStorage";
 	private static final String DIR_NAME = "productStatistics";
 	private static final String ADMIN_JSON = "adminJson";
 	private static final String USER_JSON = "userJson";
@@ -59,19 +65,19 @@ public class Files {
 
 	public static void makeXML(ProductStorage storage) {
 		try {
-			PrintWriter pw = new PrintWriter(new File(DIR_NAME + File.separator + "xml.txt"));
+			PrintWriter pw = new PrintWriter(new File(DIR_NAME + File.separator + FILE_FORMAT));
 			Document document = DocumentHelper.createDocument();
-			Element root = document.addElement("productStorage");
+			Element root = document.addElement(PRODUCT_STORAGE);
 			Map<ProductCategories, Map<String, Set<Product>>> productStorage = storage.getProducts();
 			for (Entry<ProductCategories, Map<String, Set<Product>>> entry : productStorage.entrySet()) {
-				Element category = root.addElement("category");
+				Element category = root.addElement(CATEGORY);
 				category.addText(entry.getKey().name());
 				for (Entry<String, Set<Product>> entry2 : entry.getValue().entrySet()) {
-					Element subcategory = category.addElement("subcategory");
+					Element subcategory = category.addElement(SUBCATEGORY);
 					subcategory.addText(entry2.getKey());
-					Element products = subcategory.addElement("products");
+					Element products = subcategory.addElement(PRODUCTS);
 					for (Product prod : entry2.getValue()) {
-						Element product = products.addElement("product");
+						Element product = products.addElement(PRODUCT);
 						products.addText(prod.toString());
 
 					}

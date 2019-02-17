@@ -9,6 +9,7 @@ import storage.ProductStorage;
 
 public class Distributor extends Thread {
 
+	private static final int MILLISECONDS_FOR_SLEEP = 2000;
 	private Map<Product, Integer> forDelivery = new ConcurrentHashMap<>();
 	private ProductStorage productStorage;
 
@@ -21,7 +22,6 @@ public class Distributor extends Thread {
 	public void run() {
 		while (true) {
 			while (this.forDelivery.isEmpty()) {
-				System.out.println("Distrubutor is here!");
 				synchronized (this.productStorage) {
 					try {
 						this.productStorage.wait();
@@ -32,9 +32,8 @@ public class Distributor extends Thread {
 			}
 
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(MILLISECONDS_FOR_SLEEP);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			for (Entry<Product, Integer> entry : this.forDelivery.entrySet()) {

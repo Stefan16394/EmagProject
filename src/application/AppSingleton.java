@@ -29,6 +29,8 @@ public class AppSingleton {
 	}
 
 	public static class App {
+		private static final String ADMIN_PASSWORD = "admin";
+		private static final String ADMIN_EMAIL = "admin@emag.bg";
 		private UserService userService;
 		private UserStorage userStorage;
 		private ProductService productService;
@@ -44,6 +46,8 @@ public class AppSingleton {
 			this.userService = new UserService();
 			this.userStorage = new UserStorage();
 			this.observers = new HashSet<IObserver>();
+			this.productStorage.getDistributor().start();
+			new DeliverService(this.productStorage.getOrdersStorage().getForDelivery()).start();
 		}
 
 		public void notifyObservers(Message message) {
@@ -54,16 +58,9 @@ public class AppSingleton {
 			Scanner sc = new Scanner(System.in);
 
 			this.productService.generateRandomProducts();
-			this.productStorage.getDistributor().start();
-//			System.out.println();
-//			System.out.println();
-//			System.out.println();
-//			System.out.println();
-//			this.productStorage.listAllProducts();
-			this.userStorage.registerUser(UserFactory.createUser("admin@emag.bg", "admin", true));
-			this.userStorage.registerUser(UserFactory.createUser("a@a.bg", "1234", false));
-			this.currentUser = this.userStorage.logIn("a@a.bg", "1234");
-			new DeliverService(this.productStorage.getOrdersStorage().getForDelivery()).start();
+			this.userStorage.registerUser(UserFactory.createUser(ADMIN_EMAIL, ADMIN_PASSWORD, true));
+//			this.userStorage.registerUser(UserFactory.createUser("a@a.bg", "1234", false));
+//			this.currentUser = this.userStorage.logIn("a@a.bg", "1234");
 
 			while (true) {
 				if (this.currentUser != null && this.currentUser.isAdmin()) {
@@ -98,9 +95,9 @@ public class AppSingleton {
 					}
 				} else {
 					System.out.println("Enter command: 1 - register User, 2 - log in,"
-							+ " 3 - Find Product By Category, 4 - Delete account, 5 - Log out,"
-							+ " 6 - Check out the things in your cart, 7 - Check your messages "
-							+ ", 8 - Print orders");
+							+ " 3 - Find Product By Category, 4 - Delete account, 5 - Log out, ");
+					System.out.println("               6 - Check out the things in your cart, 7 - Check your messages, " 
+							+ "8 - Print orders");
 					String command = sc.nextLine();
 					switch (command) {
 					case "1":
